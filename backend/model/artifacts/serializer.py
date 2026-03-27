@@ -1,5 +1,5 @@
 import pickle
-from config.settings import ARTIFACTS_DIR, MODEL_PATH, SCALER_PATH
+from model.config.settings import ARTIFACTS_DIR, MODEL_PATH, SCALER_PATH
 
 def save_artifacts(best_model_name, best_model_obj, scaler):
     """

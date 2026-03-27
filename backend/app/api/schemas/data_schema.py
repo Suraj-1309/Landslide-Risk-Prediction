@@ -65,3 +65,14 @@ class ErrorResponse(BaseModel):
     message: str
     details: list[ErrorDetail] = Field(default_factory=list)
 
+
+class RetrainResponse(BaseModel):
+    status: str
+    message: str
+    rows_original: int = Field(..., ge=0)
+    rows_requests: int = Field(..., ge=0)
+    rows_combined: int = Field(..., ge=1)
+    best_model: str
+    best_auc: float = Field(..., ge=0.0, le=1.0)
+    best_accuracy: float = Field(..., ge=0.0, le=1.0)
+
