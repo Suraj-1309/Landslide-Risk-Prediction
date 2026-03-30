@@ -1,6 +1,7 @@
 import pandas as pd
 from pathlib import Path
 from fastapi import  HTTPException
+from model.config.settings import DATASET_COLS
 
 
 # data.py is in backend/app/api/routes, so parents[3] is backend/
@@ -13,7 +14,12 @@ def load_data_service() -> pd.DataFrame:
     if not DATASET_PATH.exists():
         raise HTTPException(status_code=400, detail=f"Dataset not found: {DATASET_PATH}")
     try:
-        return pd.read_csv(DATASET_PATH)
+        return pd.read_csv(
+            DATASET_PATH,
+            header=0,
+            names=DATASET_COLS,
+            usecols=range(len(DATASET_COLS)),
+        )
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"failed to read dataset: {exc}") from exc
     

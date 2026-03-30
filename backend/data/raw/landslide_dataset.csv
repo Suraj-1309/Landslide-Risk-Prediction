@@ -1,4 +1,4 @@
-Rainfall_mm,Slope_Angle,Soil_Saturation,Vegetation_Cover,Earthquake_Activity,Proximity_to_Water,Landslide,m
+Rainfall_mm,Slope_Angle,Soil_Saturation,Vegetation_Cover,Earthquake_Activity,Proximity_to_Water,Landslide,Soil_Type_Gravel,Soil_Type_Sand,Soil_Type_Silt
 206.1810178271,58.2750007243,0.8927975767,0.3394633937,4.3900466011,0.0999749158,1,0,0,0
 218.8873337949,36.6798013899,0.6571467272,0.3603553892,4.1410289476,0.8324426408,1,0,0,1
 181.8508666017,31.3638738522,0.6733618039,0.2216968972,5.3118910791,0.023062425,1,0,0,1
