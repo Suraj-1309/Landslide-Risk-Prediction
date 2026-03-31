@@ -1,14 +1,13 @@
-import { useState } from 'react'
+import AppRoutes from "./app/routes/routes";
+import Navbar from "./components/layout/Navbar";
 
 function App() {
-
   return (
-    <>
-      <h1>
-        Working on the project beb
-      </h1>
-    </>
-  )
+    <div className="min-h-screen bg-slate-50">
+      <Navbar />
+      <AppRoutes/>
+    </div>
+  );
 }
 
-export default App
+export default App;
