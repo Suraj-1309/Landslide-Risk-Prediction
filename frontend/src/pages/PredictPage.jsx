@@ -125,12 +125,12 @@ export default function PredictPage() {
           <span className="text-sm font-medium text-slate-700">
             Rainfall (mm)
           </span>
-          <span className="text-xs text-slate-500">Min: 0, Max: 1000</span>
+          <span className="text-xs text-slate-500">Min: 50, Max: 300</span>
           <input
             type="number"
             step="any"
-            min="0"
-            max="1000"
+            min="50"
+            max="300"
             name="rainfall_mm"
             value={form.rainfall_mm}
             onChange={handleChange}
@@ -143,12 +143,12 @@ export default function PredictPage() {
           <span className="text-sm font-medium text-slate-700">
             Slope Angle
           </span>
-          <span className="text-xs text-slate-500">Min: 0, Max: 90</span>
+          <span className="text-xs text-slate-500">Min: 5, Max: 60</span>
           <input
             type="number"
             step="any"
-            min="0"
-            max="90"
+            min="5"
+            max="60"
             name="slope_angle"
             value={form.slope_angle}
             onChange={handleChange}
@@ -197,12 +197,12 @@ export default function PredictPage() {
           <span className="text-sm font-medium text-slate-700">
             Earthquake Activity
           </span>
-          <span className="text-xs text-slate-500">Min: 0, Max: 10</span>
+          <span className="text-xs text-slate-500">Min: 0, Max: 6.5</span>
           <input
             type="number"
             step="any"
             min="0"
-            max="10"
+            max="6.5"
             name="earthquake_activity"
             value={form.earthquake_activity}
             onChange={handleChange}
@@ -215,12 +215,12 @@ export default function PredictPage() {
           <span className="text-sm font-medium text-slate-700">
             Proximity to Water
           </span>
-          <span className="text-xs text-slate-500">Min: 0, Max: 50</span>
+          <span className="text-xs text-slate-500">Min: 0, Max: 2</span>
           <input
             type="number"
             step="any"
             min="0"
-            max="50"
+            max="2"
             name="proximity_to_water"
             value={form.proximity_to_water}
             onChange={handleChange}
@@ -303,6 +303,10 @@ export default function PredictPage() {
           </h2>
           <div className="mt-3 grid gap-2 text-sm text-slate-700">
             <p>
+              <span className="font-medium">Best Model:</span>{" "}
+              {result.best_model || "N/A"}
+            </p>
+            <p>
               <span className="font-medium">Landslide Risk:</span>{" "}
               <span
                 className={
@@ -321,6 +325,44 @@ export default function PredictPage() {
               {(result.probability * 100).toFixed(2)}%
             </p>
           </div>
+
+          {result.model_predictions &&
+          Object.keys(result.model_predictions).length > 0 ? (
+            <div className="mt-5 overflow-x-auto rounded-md border border-slate-200">
+              <table className="min-w-full text-left text-sm">
+                <thead className="bg-slate-100">
+                  <tr>
+                    <th className="px-3 py-2 font-semibold text-slate-800">
+                      Model
+                    </th>
+                    <th className="px-3 py-2 font-semibold text-slate-800">
+                      Prediction
+                    </th>
+                    <th className="px-3 py-2 font-semibold text-slate-800">
+                      Probability
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(result.model_predictions).map(
+                    ([modelName, prediction]) => (
+                      <tr key={modelName} className="border-t border-slate-200">
+                        <td className="px-3 py-2 text-slate-700">
+                          {modelName}
+                        </td>
+                        <td className="px-3 py-2 text-slate-700">
+                          {prediction.landslide ? "Landslide" : "No Landslide"}
+                        </td>
+                        <td className="px-3 py-2 text-slate-700">
+                          {(Number(prediction.probability) * 100).toFixed(2)}%
+                        </td>
+                      </tr>
+                    ),
+                  )}
+                </tbody>
+              </table>
+            </div>
+          ) : null}
         </section>
       ) : null}
     </main>
